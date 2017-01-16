@@ -1,0 +1,71 @@
+Developing Data Products Week 4 - Shiny Application
+========================================================
+author: Charles Smith
+date: January 15, 2017
+autosize: true
+
+Introduction
+========================================================
+
+The inspiration for my Shiny Application is the article ["Which Programming Languages Have the Happiest
+(and Angriest) Commenters"](https://hackernoon.com/which-programming-languages-have-the-happiest-and-angriest-commenters-ebe91b3852ed#.2339ersmo), by Sara Robinson. My application uses the results of the query she did on the Stack Overflow dataset to show bar charts of the happiest and angriest commenters.  The application has radio buttons for switching between happiest and angriest commenters.  Of course, R programmers are the happiest.
+
+The application requires the following libraries:
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+library(shiny)
+library(ggplot2)
+```
+The Data for the Happiest Commenters
+========================================================
+```{r,echo=FALSE}
+library(knitr)
+happyDf <- data.frame(Tag=c("R","Ruby on Rails","XML","Ruby","CSS","iPhone",
+                            "Regex","Swift","Jquery","HTML","Python",
+                            "Objective-C","IOS","AngularJs","Javascript"),
+                      
+                      PercentHappy=c(20.18,17.59,17.44,16.99,16.92,16.85,16.77,
+                                     16.4,16.39, 15.86,15.74,15.64,15.53,15.45,
+                                     15.38),
+                      
+                      Abbr=c("R","Rails","XML","Ruby","CSS","iPhone","Regex",
+                             "Swift","Jquery","HTML","Python","Obj-C","IOS",
+                             "Angular","JS"))
+
+kable(happyDf)
+```
+
+Chart displayed when the user clicks "Show Happiest":
+========================================================
+```{r, fig.height=10, fig.width=20}
+ggplot(happyDf,aes(reorder(Abbr,PercentHappy), y = PercentHappy, fill = Tag)) +
+        geom_bar(stat = "identity", color = "black") +
+        xlab("Tag") + ylab("Percent Happy")
+```
+The Data for the Angriest Commenters
+========================================================
+
+```{r,echo=FALSE}
+angryDf <- data.frame(Tag=c("Objective-C","C","C++","iPhone","IOS",
+                            "Multithreading","Arrays",
+                            "PHP","Algorithm","MySql","Ajax","String",
+                            "Java","Regex","JSON","XML"),
+                            
+                      PercentAngry=c(3.06,3.0,2.93,2.93,2.73,2.57,
+                                     2.51,2.51,2.48,2.48,2.46,2.43,
+                                     2.41,2.36,2.34,2.34),
+                                     
+                      Abbr=c("Obj-C","C","C++","iPhone","IOS",
+                             "Threading","Arrays","PHP",
+                             "Algorithm","MySql","Ajax","String",
+                             "Java","Regex","JSON","XML"))
+kable(angryDf)
+```
+
+Chart displayed when the user clicks "Show Angriest"
+========================================================
+```{r, fig.height=10, fig.width=20}
+ggplot(angryDf,aes(reorder(Abbr,PercentAngry), y = PercentAngry, fill = Tag)) +
+        geom_bar(stat = "identity", color = "black") + xlab("Tag") + ylab("Percent Angry")
+```
+
