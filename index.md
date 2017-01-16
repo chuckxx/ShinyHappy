@@ -10,6 +10,8 @@ Introduction
 The inspiration for my Shiny Application is the article ["Which Programming Languages Have the Happiest
 (and Angriest) Commenters"](https://hackernoon.com/which-programming-languages-have-the-happiest-and-angriest-commenters-ebe91b3852ed#.2339ersmo), by Sara Robinson. My application uses the results of the query she did on the Stack Overflow dataset to show bar charts of the happiest and angriest commenters.  The application has radio buttons for switching between happiest and angriest commenters.  Of course, R programmers are the happiest.
 
+The code and data for my application are in [my github repo](https://github.com/chuckxx/ShinyHappy)
+
 The application requires the following libraries:
 
 
